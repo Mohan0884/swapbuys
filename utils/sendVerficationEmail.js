@@ -6,7 +6,7 @@ const sendVerificationEmail = async ({
   verificationToken,
   origin,
 }) => {
-  const verifyEmail = `${origin}/verify?token=${verificationToken}&gmail=${gmail}`;
+  const verifyEmail = `swapbuy.onrender.com/verify?token=${verificationToken}&gmail=${gmail}`;
 
   const message = `<p>Please confirm your email by clicking on the following link : 
   <a href="${verifyEmail}">Verify Email</a> </p>`;
