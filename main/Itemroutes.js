@@ -1,6 +1,6 @@
-const Item =require('../main/Item')
+import Item from '../main/Item.js'
 
-const Products=async(req,res)=>{
+export const Products=async(req,res)=>{
     
     const gmail=req.body.gmail;
     const name=req.body. name;
@@ -19,17 +19,17 @@ const Products=async(req,res)=>{
     }
 
 }
-const Sendproducts=async(req,res)=>{
+export const Sendproducts=async(req,res)=>{
     const data=await Item.find({})
     res.send({data})
     //console.log(data);
 }
-const GetProductDetails=async(req,res)=>{
+export const GetProductDetails=async(req,res)=>{
     const _id=req.body.id;
     const data=await Item.find({_id});
     res.send({data})
 }
-const ProductDeleteitem=async(req,res)=>{
+export const ProductDeleteitem=async(req,res)=>{
     const itemId = req.params.id;
     console.log(itemId)
     try {
@@ -42,9 +42,8 @@ res.status(200).send({message:"Deletetion suceesfull"})
     }
     const datacar=await Item.findOneAndDelete({ _id: itemId });
 }
-const MyproductsItems=async(req,res)=>{
+export const MyproductsItems=async(req,res)=>{
     const gmail = req.body.gmail;
     const data=await Item.find({gmail});
     res.send({data})
 }
-module.exports={Products,Sendproducts,GetProductDetails,ProductDeleteitem,MyproductsItems}

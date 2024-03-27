@@ -1,10 +1,10 @@
-const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
-const crypto = require('crypto');
+import mongoose from 'mongoose';
+import jwt  from 'jsonwebtoken';
+import crypto from 'crypto';
 
 const secretKey = crypto.randomBytes(32).toString('hex');
 // const Schema = mongoose.Schema;
-const bcrypt=require('bcrypt')
+import bcrypt from 'bcrypt';
 
  
 
@@ -83,4 +83,4 @@ UserSchema.methods.comparePassword = async function (canditatePassword) {
 
 const User = mongoose.model('User', UserSchema);
 
-module.exports = User;
+export default User;

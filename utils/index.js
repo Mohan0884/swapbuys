@@ -1,17 +1,8 @@
-const { createJWT, isTokenValid, attachCookiesToResponse } = require('./jwt');
-const createTokenUser = require('./createTokenUser');
-const checkPermissions = require('./checkPermissions');
-const sendVerificationEmail = require('./sendVerficationEmail');
-const sendResetPasswordEmail = require('./sendResetPasswordEmail');
-const createHash = require('./createHash');
+export {default as  createJWT,default as  isTokenValid,default as  attachCookiesToResponse } from './jwt.js';
+export {default as createTokenUser} from './createTokenUser.js';
+export {default as checkPermissions} from './checkPermissions.js';
+export {default as sendVerificationEmail} from './sendVerficationEmail.js';
+export {default as sendResetPasswordEmail} from './sendResetPasswordEmail.js';
+export {default as createHash} from './createHash.js';
 
-module.exports = {
-  createJWT,
-  isTokenValid,
-  attachCookiesToResponse,
-  createTokenUser,
-  checkPermissions,
-  sendVerificationEmail,
-  sendResetPasswordEmail,
-  createHash,
-};
+

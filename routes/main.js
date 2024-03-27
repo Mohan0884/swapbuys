@@ -1,10 +1,10 @@
 
-const express=require('express');
+import express from 'express';
 const router=express.Router();
-const {Login,Register,Reset,verifyEmail,Forgotpassword}=require('../Controllers/main')
+import  {Login,Register,Reset,verifyEmail,Forgotpassword} from '../Controllers/main.js'
  
 
-const {Products,Sendproducts,GetProductDetails,ProductDeleteitem,MyproductsItems}=require('../main/Itemroutes')
+import {Products,Sendproducts,GetProductDetails,ProductDeleteitem,MyproductsItems} from '../main/Itemroutes.js'
 
 
 
@@ -25,4 +25,4 @@ router.post('/forgot-password',Forgotpassword);
 
  
  
-module.exports = router;
+export default router;

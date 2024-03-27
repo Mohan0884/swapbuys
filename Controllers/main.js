@@ -1,17 +1,21 @@
-const Registration=require("../models/Registration")
-const bcrypt=require('bcrypt')
-const crypto = require('crypto');
-const Token = require('../models/Token');
-const { StatusCodes } = require('http-status-codes');
-const CustomError = require('../errors');
-const {
-  attachCookiesToResponse,
-  createTokenUser,
-  sendVerificationEmail,
-  sendResetPasswordEmail,
-  createHash,
-} = require('../utils');
-const Register= async(req,res)=>{
+import Registration from "../models/Registration.js"
+import  bcrypt from 'bcrypt'
+import crypto  from 'crypto';
+import Token from '../models/Token.js';
+import { StatusCodes } from 'http-status-codes';
+import createTokenUser from '../utils/createTokenUser.js';
+import sendVerificationEmail from '../utils/sendVerificationEmail.js';
+import sendResetPasswordEmail from '../utils/sendResetPasswordEmail.js';
+import createHash from '../utils/createHash.js';
+
+// import {
+//   // attachCookiesToResponse,
+//   createTokenUser,
+//   sendVerificationEmail,
+//   sendResetPasswordEmail,
+//   createHash,
+// } from '../utils';
+export const Register= async(req,res)=>{
   const verificationToken = crypto.randomBytes(40).toString('hex');
   let newUser;
   const Fullname=req.body.fullname;
@@ -50,7 +54,7 @@ const Register= async(req,res)=>{
   
   
 }
-const verifyEmail = async (req, res) => {
+export  const verifyEmail = async (req, res) => {
   const { verificationToken, gmail } = req.body;
   const user = await Registration.findOne({ gmail });
     if (!user) {
@@ -68,7 +72,7 @@ const verifyEmail = async (req, res) => {
   res.status(200).json({ message: 'Email Verified' });
 };
 
-const Login=async (req,res) =>{
+export  const Login=async (req,res) =>{
   const gmail=req.body.email;
   const password=req.body.password;
    
@@ -129,7 +133,7 @@ const Login=async (req,res) =>{
  
  
  
-const Forgotpassword = async (req, res) => {
+export  const Forgotpassword = async (req, res) => {
   const gmail  = req.body.email;
   if (!gmail) {
     return res.status(401).send({message:"please enter valid email account"})
@@ -155,7 +159,7 @@ const Forgotpassword = async (req, res) => {
   }
   res.status(200).send({message:"Please check your email for reset password link"})
 };
-const Reset=async(req,res)=>{
+export const Reset=async(req,res)=>{
   const { verificationToken, gmail,password } = req.body;
   //console.log(verificationToken, gmail,password)
   if (!verificationToken|| !gmail || !password) { 
@@ -174,12 +178,9 @@ const Reset=async(req,res)=>{
         }
    }
 
-  res.status(200).send( {message:"Rreset password sucessfully"});
-   
+   res.status(200).send( {message:"Reset password sucessfully"});
 
 }
-   
-module.exports={Register,Login,Reset,verifyEmail,Forgotpassword}
 
 
 

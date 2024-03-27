@@ -1,8 +1,8 @@
-const CustomError = require('../errors');
-const { isTokenValid } = require('../utils');
-const Token = require('../models/Token');
-const { attachCookiesToResponse } = require('../utils');
-const authenticateUser = async (req, res, next) => {
+import CustomError from '../errors';
+import { isTokenValid } from '../utils';
+import Token from '../models/Token.js';
+import { attachCookiesToResponse } from '../utils';
+export const authenticateUser = async (req, res, next) => {
   const { refreshToken, accessToken } = req.signedCookies;
 
   try {
@@ -35,7 +35,7 @@ const authenticateUser = async (req, res, next) => {
   }
 };
 
-const authorizePermissions = (...roles) => {
+export const authorizePermissions = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
       throw new CustomError.UnauthorizedError(
@@ -46,7 +46,4 @@ const authorizePermissions = (...roles) => {
   };
 };
 
-module.exports = {
-  authenticateUser,
-  authorizePermissions,
-};
+

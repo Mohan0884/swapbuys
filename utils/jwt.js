@@ -1,13 +1,14 @@
-require("dotenv").config()
-const jwt = require('jsonwebtoken');
-const createJWT = ({ payload }) => {
+import * as dotenv from 'dotenv';
+dotenv.config();
+import jwt from 'jsonwebtoken';
+export const createJWT = ({ payload }) => {
   const token = jwt.sign(payload, process.env.JWT_SECRET);
   return token;
 };
 
-const isTokenValid = (token) => jwt.verify(token, process.env.JWT_SECRET);
+export const isTokenValid = (token) => jwt.verify(token, process.env.JWT_SECRET);
 
-const attachCookiesToResponse = ({ res, user, refreshToken }) => {
+export const attachCookiesToResponse = ({ res, user, refreshToken }) => {
   //console.log(res);
   const accessTokenJWT = createJWT({ payload: { user } });
   const refreshTokenJWT = createJWT({ payload: { user, refreshToken } });
@@ -42,8 +43,4 @@ const attachCookiesToResponse = ({ res, user, refreshToken }) => {
 //   });
 // };
 
-module.exports = {
-  createJWT,
-  isTokenValid,
-  attachCookiesToResponse,
-};
+

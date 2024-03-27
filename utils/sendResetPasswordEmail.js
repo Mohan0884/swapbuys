@@ -1,4 +1,4 @@
-const sendEmail = require('./sendEmail');
+import {sendEmail} from './sendEmail.js';
 
 const sendResetPassswordEmail = async ({ name, gmail, token, origin }) => {
   //console.log('hi')
@@ -15,4 +15,4 @@ const sendResetPassswordEmail = async ({ name, gmail, token, origin }) => {
   });
 };
 
-module.exports = sendResetPassswordEmail;
+export default sendResetPassswordEmail;

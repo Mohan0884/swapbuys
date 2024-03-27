@@ -1,7 +1,7 @@
-const nodemailer = require('nodemailer');
-const nodemailerConfig = require('./nodemailerConfig');
+import nodemailer from 'nodemailer';
+import nodemailerConfig from './nodemailerConfig.js';
 
-const sendEmail = async ({ to, subject, html }) =>
+export const sendEmail = async ({ to, subject, html }) =>
  {
   let testAccount = await nodemailer.createTestAccount();
 
@@ -27,4 +27,3 @@ const sendEmail = async ({ to, subject, html }) =>
   // } catch (error) {
   //    console.log(error);
   // }
-module.exports = sendEmail;

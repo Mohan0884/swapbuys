@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import  mongoose from 'mongoose';
 
 const otheritemsSchema = new mongoose.Schema({
   gmail:{
@@ -35,5 +35,4 @@ const otheritemsSchema = new mongoose.Schema({
    
 });
 
-const otheritems = mongoose.model('Shema', otheritemsSchema );
-module.exports=otheritems;
+export default mongoose.model('Shema', otheritemsSchema );

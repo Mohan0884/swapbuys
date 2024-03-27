@@ -1,22 +1,23 @@
-require("dotenv").config()
-require('express-async-errors');
-const express=require('express')
+import * as dotenv from 'dotenv'
+dotenv.config();
+import 'express-async-errors';
+import  express from 'express';
 const app=express()
-const bodyParser=require("body-parser")
-const router=require("./routes/main")
-const connectDB=require("./MongoDB/Connect")
-const morgan = require('morgan');
-const cookieParser = require('cookie-parser');
-const rateLimiter = require('express-rate-limit');
-const helmet = require('helmet');
-const xss = require('xss-clean');
-const cors = require('cors');
-const mongoSanitize = require('express-mongo-sanitize');
-const path = require('path');
-const { fileURLToPath } = require('url');
+import bodyParser from "body-parser";
+import router from "./routes/main.js"
+import connectDB from "./MongoDB/Connect.js"
+import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
+import rateLimiter from 'express-rate-limit';
+import helmet from 'helmet';
+import xss from 'xss-clean';
+import cors from 'cors';
+import mongoSanitize from 'express-mongo-sanitize';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-// __filename=fileURLToPath(import.meta.url);
-__dirname=path.dirname(__filename);
+const __filename=fileURLToPath(import.meta.url);
+const __dirname=path.dirname(__filename);
 
 app.use(bodyParser.json({ limit: '10mb' }));
 //app.use(bodyParser.json()) 
@@ -33,13 +34,7 @@ app.use(
 );
 
 app.use(express.static(path.join(__dirname,'/client/build')));
-
-const notFoundMiddleware = require('./middleware/not-found');
-const errorHandlerMiddleware = require('./middleware/error-handler');
-app.use(notFoundMiddleware);
-app.use(errorHandlerMiddleware);
-
- app.use(helmet());
+app.use(helmet());
 app.use(cors());
 app.use(xss());
 app.use(mongoSanitize());
@@ -47,7 +42,13 @@ app.use(mongoSanitize());
 app.use(express.json());
 app.use(cookieParser() );
 console.log(__dirname);
-app.get('*',(req,res)=>res.sendFile(path.join(__dirname,'/client/build','index.html')))
+app.get('*',(req,res)=>res.sendFile(path.join(__dirname,'/client/build','index.html')));
+import notFoundMiddleware from './middleware/not-found.js';
+import errorHandlerMiddleware from './middleware/error-handler.js';
+app.use(notFoundMiddleware);
+app.use(errorHandlerMiddleware);
+
+ 
   const port=process.env.PORT || 5000;
 const start=async()=>{
     try {
