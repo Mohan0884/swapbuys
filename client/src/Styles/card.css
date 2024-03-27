@@ -570,3 +570,19 @@ border-radius: 20px;
 .nav-prod div{
 padding:10px;
 }
+
+.invisible{
+  padding:20px;
+  display: none;
+}
+@media (max-width:550px) {
+  .header-search-prod{
+    display: none;
+  } 
+  .invisible{
+    padding:20px;
+    display:flex;
+    border-radius: 30px;
+    border: 0px 0px 2px 4px black;
+  }
+}

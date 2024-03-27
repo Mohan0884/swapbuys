@@ -146,6 +146,17 @@ function Products() {
           My Products
         </div>
       </div>
+      <div className='header-search-prod invisible'>
+          <input
+            type='text'
+            className='search-input-prod'
+            value={searchValue}
+            placeholder='search in singular form of an item'
+            onChange={(e) => setSearchValue(e.target.value)}
+            onKeyPress={handleSearch}
+          />
+          <SearchIcon className='header-search-icon-prod' onClick={handleSearch} />
+        </div>
       <div className='filters-prod'>
         <div className='row-filters-prod'>
           <div className='filter-prod' value='allitems' onClick={fetchDatamore.bind(null, 'allitems')}>
@@ -174,7 +185,9 @@ function Products() {
             Others
           </div>
         </div>
+        
       </div>
+      
       <div>
         {isLoading ? (
           <p className='loading'>Loading...</p>
