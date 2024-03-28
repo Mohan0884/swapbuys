@@ -150,6 +150,7 @@
 // export default Form;
 import React, { useState } from 'react';
 import '../Styles/UploadForm.css';
+import { toast } from 'react-toastify';
 
 const Form = () => {
   const gmail = localStorage.getItem('gmail');
@@ -211,17 +212,18 @@ const Form = () => {
           image,
         }),
       });
-
-      if (response.status === 200) {
-        setUploadStatus('Item posted successfully.');
-      } else {
-        setUploadStatus('Failed to post item. Please try again.');
+      if(response.status===500){
+          toast.error('Demo User Read Only');
+          
       }
+      if (response.status === 200) {
+        toast.success('Item posted successfully.');
+      } 
     } catch (error) {
       console.error(error);
-      setUploadStatus('Failed to post item. Please try again.');
+      toast.error('Failed to post item. Please try again.');
     }
-
+    
     // Reset form values
     setName('');
     setCompany('');

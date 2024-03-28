@@ -3,6 +3,7 @@ import '../Styles/Login.css';
 import Check from './Check';
 import { Link,useNavigate } from 'react-router-dom';
 import UserInput from "../hooks/UserInput";
+import { toast } from 'react-toastify';
 const isEmail = (value) => value.includes('@');
 const isNotEmpty = (value) => value.trim() !== '';
 function Login() {
@@ -58,6 +59,7 @@ function Login() {
 				setError(false);
 				 
                  Check(true);
+				 toast.success('Logged in Successfully');
 				 console.log(data.user);
 				 localStorage.setItem('token', data.user);
 				 localStorage.setItem('gmail',data.user.gmail);
@@ -85,7 +87,36 @@ function Login() {
 	  };
 	  const emailClasses = emailHasError ? 'input' : 'login-input';
       const passwordClasses = passwordHasError ? 'input' : 'login-input';
-	   
+	  const demoUserLogin = (event) => {
+		event.preventDefault();
+		const start = async (event) =>
+		 {
+			const response = await fetch('/api/v1/login', {
+				method: 'POST',
+				headers: {
+				  'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ email:'test@test.com', password:'secret' }),
+			  });
+			  const data = await response.json();
+
+			 if (response.status === 200) {
+				setError(false);
+				 
+                 Check(true);
+		
+				 toast.success('Demo User Logged In');
+               // localStorage.setItem('token', data.user);
+                 const timer = setTimeout(() => {
+					navigate('/products');
+                }, 1000);
+
+                return () => clearTimeout(timer);
+			  
+			  }
+	  }
+		start();
+	  };
 
   return (
     <div> 
@@ -131,6 +162,7 @@ function Login() {
 				{passwordHasError && <h3 className="error-text">Please enter a password.</h3>}
 				 
 				<button disabled={!formIsValid||isLoading} onClick={submitHandler} type="submit">  {isLoading ? 'Loading...' : 'LOG-IN'}</button>
+				<button className='demo-login' onClick={demoUserLogin} >Demo Login</button>
 				 
  
 				<p className='logo-register'>Don't have account <Link className='forg' to='/register'>register</Link> here? </p>

@@ -3,15 +3,15 @@ import express from 'express';
 const router=express.Router();
 import  {Login,Register,Reset,verifyEmail,Forgotpassword} from '../Controllers/main.js'
  
-
+import {authorizePermissions} from '../middleware/authentication.js'
 import {Products,Sendproducts,GetProductDetails,ProductDeleteitem,MyproductsItems} from '../main/Itemroutes.js'
 
 
 
-router.post('/main',Products);
+router.post('/main',authorizePermissions('tester'),Products);
 router.get('/main',Sendproducts);
 router.post('/main/getproduct',GetProductDetails);
-router.delete('/main/delete/:id',ProductDeleteitem);
+router.delete('/main/delete/:id',authorizePermissions('tester'),ProductDeleteitem);
 router.post('/main/products',MyproductsItems)
 
 router.post('/login',Login);

@@ -1,7 +1,8 @@
-import CustomError from '../errors';
-import { isTokenValid } from '../utils';
+import UnauthenticatedError from '../errors/unauthenticated.js';
+import UnauthorizedError from '../errors/unauthorized.js';
+import { isTokenValid } from '../utils/jwt.js';
 import Token from '../models/Token.js';
-import { attachCookiesToResponse } from '../utils';
+import { attachCookiesToResponse } from '../utils/jwt.js';
 export const authenticateUser = async (req, res, next) => {
   const { refreshToken, accessToken } = req.signedCookies;
 
@@ -19,7 +20,7 @@ export const authenticateUser = async (req, res, next) => {
     });
 
     if (!existingToken || !existingToken?.isValid) {
-      throw new CustomError.UnauthenticatedError('Authentication Invalid');
+      throw new UnauthenticatedError('Authentication Invalid');
     }
 
     attachCookiesToResponse({
@@ -31,14 +32,14 @@ export const authenticateUser = async (req, res, next) => {
     req.user = payload.user;
     next();
   } catch (error) {
-    throw new CustomError.UnauthenticatedError('Authentication Invalid');
+    throw new UnauthenticatedError('Authentication Invalid');
   }
 };
 
 export const authorizePermissions = (...roles) => {
   return (req, res, next) => {
-    if (!roles.includes(req.user.role)) {
-      throw new CustomError.UnauthorizedError(
+    if (roles.includes(req.user.role)) {
+      throw new UnauthorizedError(
         'Unauthorized to access this route'
       );
     }

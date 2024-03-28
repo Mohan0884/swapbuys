@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import '../Styles/Register.css';
 import { Link,useNavigate } from 'react-router-dom';
 import UserInput from "../hooks/UserInput";
+import { toast } from 'react-toastify';
 const isEmail = (value) => value.includes('@');
 const isNotEmpty = (value) => value.trim() !== '';
 function Register() {
@@ -68,6 +69,7 @@ function Register() {
       else if(response.status===200){
 		setSucc(error.message)
 		setError(false);
+    toast.success('Registered Successfully Login to Start!');
 		setTimeout(() => {
 			navigate('/login');
 		}, 3500);

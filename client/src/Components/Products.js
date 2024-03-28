@@ -121,7 +121,7 @@ function Products() {
             value={searchValue}
             placeholder='search in singular form of an item'
             onChange={(e) => setSearchValue(e.target.value)}
-            onKeyPress={handleSearch}
+            onKeyDown={handleSearch}
           />
           <SearchIcon className='header-search-icon-prod' onClick={handleSearch} />
         </div>

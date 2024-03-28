@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import '../Styles/Reset.css';
 import UserInput from "../hooks/UserInput";
 import {useNavigate, useLocation, Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 function useQuery() {
     return new URLSearchParams(useLocation().search);
   }
@@ -60,6 +61,7 @@ function Reset() {
           else if(response.status===200){
             setSucc(error.message)
             console.log(error.message);
+            toast.success('reset password successful');
             setError(false);
             setTimeout(() => {
               navigate('/login');

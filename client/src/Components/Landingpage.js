@@ -80,7 +80,7 @@ function Landing() {
                 <FaFacebook className='follow-land-icon'/>
             </div>
             <div className="copy-land">
-            &#169; Copyright Regenerate(2023). All Rights Reserved
+            &#169; Copyright SwapBuy(2024). All Rights Reserved
             </div>
         </div>  
     </div>

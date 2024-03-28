@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
+    <ToastContainer position='top-center' />
   </React.StrictMode>
 );
 
