@@ -8,10 +8,12 @@ import {Products,Sendproducts,GetProductDetails,ProductDeleteitem,MyproductsItem
 
 
 
-router.post('/main',authorizePermissions('tester'),Products);
+
+router.post('/main',Products);
 router.get('/main',Sendproducts);
 router.post('/main/getproduct',GetProductDetails);
-router.delete('/main/delete/:id',authorizePermissions('tester'),ProductDeleteitem);
+
+router.delete('/main/delete/:id',ProductDeleteitem);
 router.post('/main/products',MyproductsItems)
 
 router.post('/login',Login);
